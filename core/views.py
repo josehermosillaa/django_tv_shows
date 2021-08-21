@@ -18,9 +18,18 @@ def add(request):
     return render(request, "add.html")
 
 def create(request):
-    new_show = Show.objects.create(title= request.POST['title'], network= request.POST['network'], release_date= request.POST['releasedate'], desc= request.POST['desc'])
-    print(new_show.id)
-    return redirect(f"/shows/{new_show.id}")
+    #Chequeamos los errores primero
+    errors = Show.objects.basic_validator(request.POST)
+    #si el largo de los errores es mayor a cero manda un mensaje
+    if len(errors)> 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect("/shows/new")
+
+    else:
+        new_show = Show.objects.create(title= request.POST['title'], network= request.POST['network'], release_date= request.POST['releasedate'], desc= request.POST['desc'])
+        print(new_show.id)
+        return redirect(f"/shows/{new_show.id}")
 
 def show(request, show_id):
     show = Show.objects.get(id=show_id)
@@ -42,6 +51,13 @@ def edit(request, show_id):
     return render(request, "edit.html",context)
 
 def update(request, show_id):
+
+    errors = Show.objects.basic_validator(request.POST)
+    if len(errors)> 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect(f"/{show_id}/edit")
+    else:
         input_date= request.POST['releasedate']
         current_date= datetime.strptime(input_date, '%m/%d/%Y')
         format_date= current_date.strftime('%Y-%m-%d')

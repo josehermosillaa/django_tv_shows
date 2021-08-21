@@ -1,43 +1,63 @@
 <!DOCTYPE html>
-<html lang= "en">
-    <head>
-        <meta charset = "utf-8">
-        <title><i class="fas fa-tv"></i>Programas de TV</title>
-        <meta name="viewport" content="width-device-width, initial-scale-1">
-        {% load static %}
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <script src="https://kit.fontawesome.com/c8a52125e9.js" crossorigin="anonymous"></script>
-    </head>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Programas de TV</title>
+    <meta name="viewport" content="width-device-width, initial-scale-1">
+    {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://kit.fontawesome.com/c8a52125e9.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
     <div class="container">
-        <body>
-            <div class= "row">
-                <h1><i class="fas fa-tv"></i> Todos los Programas</h1>
-            </div>
-            <div class = "row">
-                <table class= "table table-bordered table-striped">
-                    <tr>
-                        <th>ID</th>
-                        <th>Titulo</th>
-                        <th><i class="fas fa-globe-americas"></i> Network</th>
-                        <th><i class="fas fa-calendar-day"></i> Fecha de lanzamiento</th>
-                        <th>Acciones</th>
-                    </tr>
-                    {% for shows in all_shows %}
-                    <tr>
-                        <td>{{shows.id}}</td>
-                        <td>{{shows.title}}</td>
-                        <td>{{shows.network}}</td>
-                        <td>{{shows.release_date}}</td>
-                        <div id="tablelinks">
-                            <td><a href="/shows/{{shows.id}}"><i class="fas fa-eye"></i></a>| <a href="/{{shows.id}}/edit"><i class="fas fa-edit"></i></a>| <a href="shows/{{shows.id}}/destroy"><i class="fas fa-trash"></i></a></td>
-                        </div>
-                    </tr>
-                    {% endfor %}
-                </table>
-            </div>
-            <div class = "row">
-                <a href="/shows/new">Agregar un nuevo programa</a>
-            </div>
-        </body>
-    </div>
+        <div class="row">
+            <h1> Todos los Programas</h1>
+        </div>
+        <div class="row">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Titulo</th>
+                    <th><i class="fas fa-globe-americas"></i> Network</th>
+                    <th><i class="fas fa-calendar-day"></i> Fecha de lanzamiento</th>
+                    <th>Acciones</th>
+                </tr>
+                {% for shows in all_shows %}
+                <tr>
+                    <td>{{shows.id}}</td>
+                    <td>{{shows.title}}</td>
+                    <td>{{shows.network}}</td>
+                    <td>{{shows.release_date}}</td>
+                    <div id="tablelinks">
+                        <td><a href="/shows/{{shows.id}}"><i class="fas fa-eye"></i></a>| <a
+                                href="/{{shows.id}}/edit"><i class="fas fa-edit"></i></a>| <a
+                                href="shows/{{shows.id}}/destroy"><i class="fas fa-trash"></i></a></td>
+                    </div>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="row">
+            <a href="/shows/new">Agregar un nuevo programa</a>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+                crossorigin="anonymous"></script>
+    
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+                integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    
+    </body>
+    
+    
+    
+    </html>
