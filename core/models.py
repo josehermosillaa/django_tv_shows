@@ -13,10 +13,10 @@ class ShowManager(models.Manager):
             errors["network"] = "Network debe tener al menos 3 caracteres"
         if len(postData['desc']) <10:
             errors["desc"] = "La descripcion debe tener al menos 10 caracteres"
-        if postData['releasedate'] >= fecha:
-            errors['releasedate'] = f'La fecha no puede ser igual o futura a hoy {fecha}'
-        if postData['releasedate'] == "":
-            errors['releasedate'] = f'se debe ingresar una fecha valida'
+        if postData['release_date'] >= fecha:
+            errors['release_date'] = f'La fecha no puede ser igual o futura a hoy {fecha}'
+        if postData['release_date'] == "":
+            errors['release_date'] = f'se debe ingresar una fecha valida'
         return errors
 
 class Show(models.Model):

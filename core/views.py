@@ -10,11 +10,15 @@ def index(request):
 def shows(request):
     context = {
         "all_shows": Show.objects.all(),
+        "titulo": "Shows de TV"
     }
     print(context)
     return render(request, "shows.html", context)
 
 def add(request):
+    context = {
+        "titulo":"Agregar un nuevo Show"
+    }
     return render(request, "add.html")
 
 def create(request):
@@ -27,26 +31,28 @@ def create(request):
         return redirect("/shows/new")
 
     else:
-        new_show = Show.objects.create(title= request.POST['title'], network= request.POST['network'], release_date= request.POST['releasedate'], desc= request.POST['desc'])
+        new_show = Show.objects.create(title= request.POST['title'], network= request.POST['network'], release_date= request.POST['release_date'], desc= request.POST['desc'])
         print(new_show.id)
         return redirect(f"/shows/{new_show.id}")
 
 def show(request, show_id):
     show = Show.objects.get(id=show_id)
-    #format time for field to display as M/DD/YYYY
-    release_format = show.release_date.strftime('%B %d, %Y')
+    
+    
     context = {
-        "release_date_format": release_format,
+        
         "this_show": show,
+        "titulo": "agregando show"
     }
     return render(request, "show.html", context)
 
 def edit(request, show_id):
     show = Show.objects.get(id=show_id)
-    release_format = show.release_date.strftime('%m/%d/%Y')
+    # release_format = show.releasedate.strftime('%m/%d/%Y')
     context = {
         "this_show": show, 
-        "release_date_format": release_format
+        "titulo": "Editando Show"
+        # "release_date_format": release_format
     }
     return render(request, "edit.html",context)
 
@@ -61,7 +67,7 @@ def update(request, show_id):
         update = Show.objects.get(id= show_id)
         update.title = request.POST['title']
         update.network = request.POST['network']
-        update.release_date = request.POST['releasedate'] 
+        update.release_date = request.POST['release_date'] 
         update.desc = request.POST['desc']
         update.save()
         return redirect(f"/shows/{show_id}")
@@ -69,4 +75,4 @@ def update(request, show_id):
 def delete(request, show_id):
     show_to_delete = Show.objects.get(id= show_id)
     show_to_delete.delete()
-    return redirect("/shows")
+    return redirect("/")
