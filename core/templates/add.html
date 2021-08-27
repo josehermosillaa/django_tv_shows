@@ -1,33 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <title>Agregar un nuevo programa de TV</title>
-    <meta name="viewport" content="width-device-width, initial-scale-1">
-    {% load static %}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <style>
-        /* mis estilos */
-    </style>
-    <!--Scripts-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="https://kit.fontawesome.com/c8a52125e9.js" crossorigin="anonymous"></script>
-
-</head>
-
+{%extends "./base.html" %}
+{%block titulo %}{{titulo}}{% endblock%}
+{%block contenido%}
 <body>
     <div class="container">
         <div class="row">
             <h1>Agregar un nuevo Programa</h1>
             <a href="/shows">Volver</a>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             {% if messages %}
             <div class="alert alert-danger" role="alert">
                 <ul class="messages">
@@ -37,7 +17,7 @@
                 </ul>
             </div>
             {% endif %}
-        </div>
+        </div> -->
         <div class="row">
             <form class="mx-auto form-group" action='/shows/create' method='POST'>
                 {% csrf_token %}
@@ -54,7 +34,7 @@
                     <div class="col-sm-4">
                         <label for="releasedate" class="col-form-label"> <i class="fas fa-calendar-day"></i> Fecha de
                             lanzamiento</label>
-                        <input class="form-control" type="date" name="releasedate">
+                        <input class="form-control" type="date" name="releasedate" value="{{request.session.show_form_description}}>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -69,15 +49,4 @@
             </form>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-        crossorigin="anonymous"></script>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-</body>
-
-
-
-</html>
+    {%endblock%}

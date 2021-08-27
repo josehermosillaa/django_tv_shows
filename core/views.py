@@ -58,13 +58,10 @@ def update(request, show_id):
             messages.error(request, value)
         return redirect(f"/{show_id}/edit")
     else:
-        input_date= request.POST['releasedate']
-        current_date= datetime.strptime(input_date, '%m/%d/%Y')
-        format_date= current_date.strftime('%Y-%m-%d')
         update = Show.objects.get(id= show_id)
         update.title = request.POST['title']
         update.network = request.POST['network']
-        update.release_date = format_date
+        update.release_date = request.POST['releasedate'] 
         update.desc = request.POST['desc']
         update.save()
         return redirect(f"/shows/{show_id}")
