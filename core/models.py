@@ -6,12 +6,17 @@ from datetime import date, datetime
 class ShowManager(models.Manager):
     def basic_validator(self, postData):
         errors= {}
+        fecha = datetime.now().strftime('%Y-%m-%d')
         if len(postData['title'])<2:
             errors["title"] = "El titulo debe tener almenos 2 caracteres"
         if len(postData['network']) <3:
             errors["network"] = "Network debe tener al menos 3 caracteres"
         if len(postData['desc']) <10:
             errors["desc"] = "La descripcion debe tener al menos 10 caracteres"
+        if postData['releasedate'] >= fecha:
+            errors['releasedate'] = f'La fecha no puede ser igual o futura a hoy {fecha}'
+        if postData['releasedate'] == "":
+            errors['releasedate'] = f'se debe ingresar una fecha valida'
         return errors
 
 class Show(models.Model):
